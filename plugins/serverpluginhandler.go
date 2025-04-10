@@ -6,9 +6,9 @@ import (
 	"plugin"
 
 	"github.com/fengyily/nhpplugins/common"
+	"github.com/fengyily/nhpplugins/log"
+	"github.com/fengyily/nhpplugins/utils"
 
-	"github.com/OpenNHP/opennhp/log"
-	"github.com/OpenNHP/opennhp/utils"
 	"github.com/gin-gonic/gin"
 )
 

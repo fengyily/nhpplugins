@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/OpenNHP/opennhp/log"
+	"github.com/fengyily/nhpplugins/log"
 )
 
 type IPTYPE int32
