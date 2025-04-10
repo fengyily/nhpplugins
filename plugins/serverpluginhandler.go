@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"path/filepath"
 	"plugin"
+	"sync"
 
 	"github.com/fengyily/nhpplugins/common"
 	"github.com/fengyily/nhpplugins/log"
@@ -41,6 +42,7 @@ type PluginHandlerSymbol struct {
 }
 
 var errPluginNotImplemented error = fmt.Errorf("plugin not implemented")
+var pluginsMutex sync.Mutex
 
 func (s *PluginHandlerSymbol) Version() string {
 	if s.sVersion == nil {
@@ -134,6 +136,8 @@ func (s *PluginHandlerSymbol) AuthWithHttp(ctx *gin.Context, req *common.HttpKno
 }
 
 func ReadPluginHandler(pluginPath string) PluginHandler {
+	pluginsMutex.Lock()
+	defer pluginsMutex.Unlock()
 	p, err := plugin.Open(filepath.Join(ExeDirPath, "plugins", pluginPath))
 	if err != nil {
 		log.Error("open plugin %s failed: %v", pluginPath, err)
